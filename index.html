@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayoub Kattouss - Portfolio Designer Graphique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Burger menu for mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .gallery-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Business Cards Section */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .business-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .business-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .business-card .details {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h3::before {
+            content: '⚡';
+            font-size: 1.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            border-radius: 5px;
+            transition: width 1s ease-out;
+            width: 0;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+
+        .contact-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Modal for images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Navigation mobile */
+            nav .container {
+                padding: 1rem;
+            }
+
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                padding: 1rem;
+                gap: 1rem;
+                text-align: center;
+                box-shadow: var(--shadow);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            /* Hero mobile */
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* Section titles mobile */
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            /* About section mobile */
+            #about > .container > div {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            #about > .container > div > div:first-child > div {
+                width: 180px !important;
+                height: 180px !important;
+                margin: 0 auto;
+            }
+
+            #about h3 {
+                font-size: 1.5rem !important;
+                text-align: center;
+            }
+
+            #about p {
+                font-size: 1rem !important;
+                text-align: justify;
+                padding: 0 0.5rem;
+            }
+
+            /* Gallery mobile */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-item-image {
+                height: 200px;
+            }
+
+            .gallery-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .gallery-item p {
+                font-size: 0.9rem;
+            }
+
+            /* Skills mobile */
+            .skills-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .skill-category {
+                padding: 1.5rem;
+            }
+
+            .skill-category h3 {
+                font-size: 1.2rem;
+            }
+
+            .skill-name {
+                font-size: 0.9rem;
+            }
+
+            /* Contact mobile */
+            .contact-info {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-link {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            /* Footer mobile */
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            /* Modal mobile */
+            .close-modal {
+                right: 20px;
+                top: 10px;
+                font-size: 35px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            nav ul {
+                font-size: 0.8rem;
+                gap: 0.3rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            #about > .container > div > div:first-child > div {
+                width: 150px !important;
+                height: 150px !important;
+            }
+
+            .gallery-item-image {
+                height: 180px;
+            }
+
+            .contact-link span:last-child {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Add button style */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1>Ayoub Kattouss</h1>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#photos">Réalisations</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Designer Graphique & Illustrateur Digital</h2>
+            <p>Identité Visuelle | Design de Cartes de Visite | Illustrations Digitales</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">À Propos</h2>
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 1000px; margin: 0 auto;">
+                <div style="text-align: center;">
+                    <div style="width: 250px; height: 250px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: var(--shadow-hover); border: 5px solid var(--secondary-color);">
+                        <img src="./imgs/photo.jpg" alt="Photo de profil" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem;">Bonjour, je suis Ayoub Kattouss</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color); margin-bottom: 1rem;">
+                        Designer graphique passionné qui débute dans la création d'identités visuelles, le design de cartes de visite et l'illustration digitale. 
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color); margin-bottom: 1rem;">
+                        Je me spécialise dans la création de designs modernes et impactants qui donnent vie aux marques. Mon approche combine créativité artistique et stratégie visuelle pour créer des designs qui captivent et communiquent efficacement.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color);">
+                        Mon expertise s'étend du branding et de l'identité visuelle aux illustrations digitales, en passant par le design marketing. Chaque projet est une nouvelle opportunité de créer quelque chose d'unique et mémorable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Gallery Section -->
+    <section id="photos">
+        <div class="container">
+            <h2 class="section-title">Mes Réalisations</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/logofitone.jpg" alt="Logo FITONE" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Logo FITONE - Fitness Club</h3>
+                        <p>Design de logo moderne pour une salle de sport avec typographie stylisée et éléments graphiques dynamiques</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/redcoach.jpg" alt="Carte RED COACH" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Carte de Visite - RED COACH</h3>
+                        <p>Carte professionnelle pour coach sportif avec design rouge et noir, incluant QR code</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/anime.jpg" alt="Illustration Anime" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Illustration Numérique - Style Anime</h3>
+                        <p>Création artistique avec ambiance urbaine japonaise et jeu de lumières cinématographique</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/dragon.jpg" alt="Artwork Goku" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Fan Art - Dragon Ball</h3>
+                        <p>Illustration vectorielle de personnages iconiques avec composition dynamique et couleurs vibrantes</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/jus.jpg" alt="Flyer Jusdétox" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Flyer Commercial - Jusdétox</h3>
+                        <p>Design marketing pour service de livraison de jus bio avec mise en page claire et informative</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image" style="background: none; padding: 0;">
+                        <img src="./imgs/artwork.jpg" alt="Illustration Goku Instinct" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Artwork Digital - Ultra Instinct</h3>
+                        <p>Illustration minimaliste avec palette de couleurs réduite et style épuré</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="competences">
+        <div class="container">
+            <h2 class="section-title">Compétences Techniques</h2>
+            <div class="skills-container">
+                <!-- Photographie -->
+                <div class="skill-category">
+                    <h3>Photographie</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Adobe Lightroom</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Adobe Photoshop</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Capture One</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Éclairage Studio</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="88"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Graphique -->
+                <div class="skill-category">
+                    <h3>Design Graphique</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Adobe Illustrator</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="92"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Adobe InDesign</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="87"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Figma</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Canva Pro</span>
+                            <span>93%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="93"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compétences Techniques -->
+                <div class="skill-category">
+                    <h3>Techniques Avancées</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Retouche Photo</span>
+                            <span>94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="94"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Composition Visuelle</span>
+                            <span>91%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="91"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Colorimétrie</span>
+                            <span>89%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="89"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Impression & Prépresse</span>
+                            <span>86%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="86"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Contactez-moi</h2>
+            <div class="contact-info">
+                <h3>Restons en contact</h3>
+                <div class="contact-links">
+                    <a href="mailto:kattouss.ayoub@gmail.com" class="contact-link">
+                        <span style="font-size: 1.5rem;">📧</span>
+                        <span><span class="__cf_email__" >kattouss.ayoub@gmail.com</span></span>
+                    </a>
+                    <a href="tel:+33123456789" class="contact-link">
+                        <span style="font-size: 1.5rem;">📱</span>
+                        <span>+212 6 00 00 00 00</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/votre-profil" target="_blank" class="contact-link">
+                        <span style="font-size: 1.5rem;">💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://www.instagram.com/ayoub_ktts" target="_blank" class="contact-link">
+                        <span style="font-size: 1.5rem;">📷</span>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ayoub Kattouss. Tous droits réservés.</p>
+            <p>Designer Graphique & Illustrateur Digital</p>
+        </div>
+    </footer>
+
+    <!-- Modal for images -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Animate skill bars when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const progress = bar.getAttribute('data-progress');
+                        bar.style.width = progress + '%';
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            observer.observe(category);
+        });
+
+        // Modal functionality for gallery items
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close-modal');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                // In a real implementation, you would set modalImg.src to the actual image source
+            });
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Add scroll animation effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.backgroundColor = 'rgba(44, 62, 80, 0.95)';
+            } else {
+                nav.style.backgroundColor = 'var(--primary-color)';
+            }
+        });
+    </script>
+</body>
+</html>
